@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>javascript动态获取显示时间</title>
+<style type="text/css">
+#timer{
+ width:300px;
+ margin:50px auto;
+ padding:20px;
+ font:24px tahoma,arial,Microsoft YaHei,sans-serif;
+ color:#c60023;
+ text-align: center;
+ background:#CCC;
+ border-radius: 5px;
+}
+</style>
+</head>
+
+<body onload="showTime()">
+<div id="timer"></div>
+
+<script type="text/javascript"> 
+//动态获取当前时间，并显示到页面
+function showTime()
+{
+ //创建Date对象
+ var today = new Date();
+ //分别获取年、月、日、时、分、秒
+ var yy = today.getFullYear();
+ var mo = today.getMonth()+1;
+ var dd = today.getDate();
+ var hh = today.getHours();
+ var mm = today.getMinutes();
+ var ss = today.getSeconds();
+
+ //如果是一位数字，则前面补0
+ function t(a){return a<10?"0"+a:a;};
+ 
+ //输出时间的格式
+ var str = yy+"年"+t(mo)+"月"+t(dd)+"日 "+t(hh)+":"+t(mm)+":"+t(ss);
+  
+ //将时间写入到id=timer的<div>的页面中，格式如：2017年9月6日 14:49:20
+ document.getElementById("timer").innerHTML = str;
+
+ //每隔1s调用setTimeout()
+ setTimeout("showTime()",1000);
+}
+</script>
+
+</body>
+</html>
