@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM操作连续添加“删除按钮”</title> 
+</head>
+<body>
+<div id='container'>
+	<button id="btn-add">新增</button> 
+	<div id="wrap"></div>
+</div>
+<script type="text/javascript"> 
+    //实现的主要功能是点击新增按钮，连续添加不超过10个的“删除按钮”，同时删除按钮可以对本按钮进行删除（除了第一个）
+    window.onload = function(){ 
+    var btnAdd = document.getElementById("btn-add");
+    btnAdd.addEventListener("click",function(){
+        var wrap = document.getElementById('wrap');
+        var length = wrap.getElementsByClassName('content-wrap').length;
+        if(length<10){                                  //控制按钮的个数在10以内
+            var contentWrap = document.createElement('div');
+            contentWrap.setAttribute('class','content-wrap');
+            var spanNode = document.createElement('span');
+            var spanText = document.createTextNode('content');
+            spanNode.appendChild(spanText);
+            var btnDel = document.createElement('button');
+            var btnDelText = document.createTextNode('删除');
+            btnDel.appendChild(btnDelText);
+            btnDel.setAttribute('id','btn-del');
+            contentWrap.appendChild(spanNode);
+            contentWrap.appendChild(btnDel);
+            wrap.appendChild(contentWrap);
+    btnDel.addEventListener("click", function(){
+        if(wrap.getElementsByClassName('content-wrap').length>1){
+            wrap.removeChild(this.parentNode);
+        }
+        },false);
+    }
+    else {
+        btnAdd.setAttribute('disabled','true');
+    }
+    },false);
+}
+</script>
+</body>
+</html>
