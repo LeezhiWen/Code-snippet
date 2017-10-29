@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>文字垂直居中</title>
+    <style type="text/css">
+        /*方法一：当只有一行或几个文字，让文字的行高和容器的高度相同即可；*/
+        /* .parent{background-color:yellow;height:100px;text-align: center;line-height:100px;}  */
+        /*方法二 absolute+transform*/
+        /*.parent{position:relative;height:100px;background-color:yellow;}
+        .child{position:absolute;top:50%;transform:translateY(-50%);}*/
+        /* 方法三 */      
+        .parent{display:table;background-color:yellow;height:100px;}
+        .child{display:table-cell; vertical-align:middle;}        
+    </style>	
+</head>
+<body>
+    <div class="parent"><div class="child">111111111111111111111111111</div></div>
+</body>
+</html>
+
