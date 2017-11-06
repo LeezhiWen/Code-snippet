@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>   
+ <head>
+  <meta charset="utf-8">
+  <title>实现一个触摸屏幕上可拖拽的正方形</title>
+  <meta name="viewport" content="width=device-width"/>
+  <style>
+   #container {
+    background-color: black;
+	  height:100px;
+	  width:100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+   }
+  </style>
+ </head>
+ <body>
+ <div id="container"></div>
+<script>
+  // 获取节点
+  var container = document.getElementById("container");
+  var oW,oH;
+  // 绑定touchstart事件
+  container.addEventListener("touchstart", function(e) {
+   //console.log(e);
+   var touches = e.touches[0];
+   oW = touches.clientX - container.offsetLeft;//clientX 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（或客户区）的水平坐标
+   oH = touches.clientY - container.offsetTop;//obj.offsetTop 指 obj 相对于版面或由 offsetParent 属性指定的父坐标的计算上侧位置
+   //阻止页面的滑动默认事件
+   console.log(touches.clientX);
+   document.addEventListener("touchmove",defaultEvent,false);
+  },false);
+ 
+  container.addEventListener("touchmove", function(e) {
+   var touches = e.touches[0];
+   var oLeft = touches.clientX - oW;//oW为鼠标以物体为父坐标系的水平位置
+   var oTop = touches.clientY - oH;//oTop物体上边缘距离面板的距离
+   if(oLeft < 0) {
+    oLeft = 0;
+   }else if(oLeft > document.documentElement.clientWidth - container.offsetWidth) {    //clientWidth内容可视区域的宽度
+    oLeft = (document.documentElement.clientWidth - container.offsetWidth);//container.offsetWidth控件自身的绝对宽度
+   }
+    if(oTop < 0) {
+    oTop = 0;
+   }else if(oTop > document.documentElement.clientHeight - container.offsetHeight) {
+    oTop = (document.documentElement.clientHeight - container.offsetHeight);//document.documentElement是文档对象根节点(html)的引用
+   }
+   container.style.left = oLeft + "px";
+   container.style.top = oTop + "px";
+  },false);
+   
+  container.addEventListener("touchend",function() {
+   document.removeEventListener("touchmove",defaultEvent,false);
+  },false);
+  function defaultEvent(e) {
+   e.preventDefault();
+  }
+</script>
+</body>
+</html>
