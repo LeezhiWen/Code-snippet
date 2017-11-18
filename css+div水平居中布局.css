@@ -1,0 +1,59 @@
+/* css+div水平居中布局
+子元素于父元素水平居中且其（ 子元素与父元素） 高度均可变 */
+
+/* 方案一：inline-block + text-align  优点：兼容性好
+*/
+<div class="paerent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.child{
+		display: inline-block;
+	}
+	.parent{
+		text-align: center;
+	}
+</style>
+
+/*方案二：table+margin 优点：无需设置父元素样式 （ 支持IE8及其以上版本）*/
+
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.child{
+		display: table;
+		margin: 0 auto;
+	}
+</style>
+
+/*方案三：absolute + transform  
+优点：绝对定位脱离文档流，不会对后续元素的布局造成影响
+缺点：transform 为 CSS3 属性，有兼容性问题*/
+
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		position:relative;
+		
+	}
+	.child{
+		display:absolute;
+		left: 50%;
+		transition: translateX(-50%);
+	}
+</style>
+
+/*方案四：flex + justify-content
+注：存在兼容性问题*/
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		display: flex;
+		justify-content: center;
+	}
+</style>

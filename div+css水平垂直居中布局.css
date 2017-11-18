@@ -1,0 +1,48 @@
+/* css+div水平垂直居中布局
+子元素于父元素水平垂直居中且其（ 子元素与父元素） 高度均可变 */
+
+/*方案一：inline-block + text-align + table-cell + vertical-align  优点：兼容性好*/
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+	.child{
+		display: inline-block;		
+	}
+</style>
+
+/*方案二：absolute + transform 注：transform 为 CSS3 属性，有兼容性问题*/
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		position:relative;
+		
+	}
+	.child{
+		display:absolute;
+		top: 50%;
+		left: 50%;
+		transition: translate(-50%,50%);
+	}
+</style>
+
+/*方案三：flex + justify-content + align-items  注：有兼容性问题*/
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+</style>
+
+

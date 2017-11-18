@@ -1,0 +1,41 @@
+/* css+div垂直居中布局
+子元素于父元素垂直居中且其（ 子元素与父元素） 高度均可变 */
+
+/* 方案一：table-cell + vertical-align  优点：兼容性好（ 支持 IE 8）*/
+
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		display: table-cell;
+		vertical-align: middle;
+	}
+</style>
+
+/*方案二：absolute + transform  注：transform 为 CSS3 属性，有兼容性问题*/
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		position:relative;
+		
+	}
+	.child{
+		display:absolute;
+		top: 50%;
+		transition: translateY(-50%);
+	}
+</style>
+
+/*方案三：flex + align-items  注：只需设置父节点属性，无需设置子元素，有兼容性问题 */
+<div class="parent">
+	<div class="child">文字</div>
+</div>
+<style>
+	.parent{
+		display: flex;
+		align-items: center;
+	}
+</style>
